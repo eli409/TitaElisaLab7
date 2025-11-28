@@ -16,6 +16,23 @@ namespace TitaElisaLab7.Data
         {
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<ShopList>().Wait();
+            _database.CreateTableAsync<Product>().Wait();
+            _database.CreateTableAsync<ListProduct>().Wait();
+        }
+        public Task<int> SaveProductAsync(Product product)
+        {
+            if(product.ID != 0)
+            {
+                return _database.UpdateAsync(product);
+            }
+            else
+            {
+                return _database.InsertAsync(product);
+            }
+        }
+        public Task<List<Product>> GetProductAsync()
+        {
+            return _database.Table<Product>().ToListAsync();
         }
         public Task<List<ShopList>> GetShopListsAsync()
         {
