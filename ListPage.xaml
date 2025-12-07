@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage.Content xmlns:local="clr-namespace:TitaElisaLab7">xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TitaElisaLab7"            
              x:Class="TitaElisaLab7.ListPage"
              Title="ListPage">
     <StackLayout Margin="20">
@@ -8,7 +9,7 @@
                 Text="{Binding Description}"
                 HeightRequest="50" >
             <Editor.Behaviors>
-                <local:ValidationBehavior />
+                <local:ValidationBehaviour />
             </Editor.Behaviors>
         </Editor>
         <Grid>
@@ -31,7 +32,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
+        <Button Text="Delete Item" MaximumHeightRequest="300" Clicked="OnDeleteItemClicked" />
         <Button Text="Add/Choose Item to buy" MaximumWidthRequest="300" Clicked="OnChooseButtonClicked" />
     </StackLayout>
-</ContentPage.Content>
+</ContentPage>

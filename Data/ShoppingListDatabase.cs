@@ -21,7 +21,7 @@ namespace TitaElisaLab7.Data
         }
         public Task<int> SaveProductAsync(Product product)
         {
-            if(product.ID != 0)
+            if (product.ID != 0)
             {
                 return _database.UpdateAsync(product);
             }
@@ -63,9 +63,9 @@ namespace TitaElisaLab7.Data
         {
             return _database.DeleteAsync(slist);
         }
-    public Task<int> SaveListProductAsync(ListProduct listp)
+        public Task<int> SaveListProductAsync(ListProduct listp)
         {
-            if(listp.ID != 0)
+            if (listp.ID != 0)
             {
                 return _database.UpdateAsync(listp);
             }
@@ -74,13 +74,26 @@ namespace TitaElisaLab7.Data
                 return _database.InsertAsync(listp);
             }
         }
-    public Task<List<Product>> GetListproductsAsync(int shoplistid)
+        public Task<List<Product>> GetListProductsAsync(int shoplistid)
         {
             return _database.QueryAsync<Product>(
                 "select P.ID, P.Description from Product P"
                 + " inner join ListProduct LP"
                 + " on P.ID = LP.ProductID where LP.ShopListID = ?",
                 shoplistid);
+        }
+        public async Task<int> DeleteListProductByIdsAsync(int shopListId, int productId)
+        {
+            var link = await _database.Table<ListProduct>()
+                .Where(lp => lp.ShopListID == shopListId && lp.ProductID == productId)
+                .FirstOrDefaultAsync();
+
+            if (link != null)
+            {
+                return await _database.DeleteAsync(link);
+            }
+
+            return 0;
         }
     }
 }

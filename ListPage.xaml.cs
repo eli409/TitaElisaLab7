@@ -5,8 +5,8 @@ public partial class ListPage : ContentPage
 {
 	public ListPage()
 	{
-		InitializeComponent();
-	}
+        InitializeComponent();
+    }
 
 	async void OnSaveButtonClicked(object sender, EventArgs e)
 	{
@@ -33,5 +33,16 @@ public partial class ListPage : ContentPage
 		base.OnAppearing();
 		var shopl = (ShopList)BindingContext;
 		listView.ItemsSource = await App.Database.GetListProductsAsync(shopl.ID);
+	}
+	async void OnDeleteItemClicked(object sender, EventArgs e)
+	{
+		var selectedProduct = listView.SelectedItem as Product;
+		var shopList = (ShopList)BindingContext;
+
+		if (selectedProduct != null)
+		{
+			await App.Database.DeleteListProductByIdsAsync(shopList.ID, selectedProduct.ID);
+			listView.ItemsSource = await App.Database.GetListProductsAsync(shopList.ID);
+		}
 	}
 }
