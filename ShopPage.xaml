@@ -23,7 +23,9 @@
                 </Grid.ColumnDefinitions>
                 <Button Text="SaveShop" Grid.Column="0" MaximumWidthRequest="200"
                         Clicked="OnSaveButtonClicked" />
-                <Button Text="Show on Map" Grid.Column="1" MaximumWidthRequest="200"
+                <Button Text="DeleteShop" Grid.Column="1" MaximumWidthRequest="200"
+                        Clicked="OnDeleteButtonClicked" />
+                <Button Text="Show on Map" Grid.Row="1" Grid.Column="0" MaximumWidthRequest="200"
                         Clicked="OnShowMapButtonClicked"></Button>
             </Grid>
         </StackLayout>
